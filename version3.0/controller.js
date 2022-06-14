@@ -6,11 +6,7 @@ uploadForm.onsubmit = async (e) => {
     let data = new FormData(uploadForm);
 
     //Envío y obtención de respuesta en formato texto
-    let response = await fetch('./upload.exe',
-        {
-            method: 'POST',
-            body: data
-        });
+    let response = await fetch('./upload.exe', { method: 'POST', body: data });
 
     let result = await response.text();
 
