@@ -27,12 +27,24 @@ int main(int /*argc*/, char ** /*argv*/)
     if(file->getDataLength() != 0)
     {
         std::string uniqueID = uuid::generate_uuid_v4();
+        std::ifstream File("./data.csv");
+        if(!File.is_open())
+        {
+            std::ofstream File("./data.csv", std::ios::app);
+            File << "name"    << "," 
+                 << "author"  << "," 
+                 << "topic"   << ","
+                 << "file" << ","
+                 << "uniqueID"            << "\n";
+        File.close();
 
+    }
+    else {File.close();}
         std::ofstream saveFile("./uploaded_files/" + uniqueID);
         file->writeToStream(saveFile);
         saveFile.close();   
         std::cout << "Upload Success!" << std::endl; 
-
+        
         std::ofstream saveData("./data.csv", std::ios::app);
         saveData << name->getValue()    << "," 
                  << author->getValue()  << "," 
